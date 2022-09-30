@@ -13,6 +13,7 @@ import {
   GetDepositResponse,
   GetDepositsRequestQuery,
   GetDepositsResponse,
+  GetMarketAllResponse,
   GetOrderRequestQuery,
   GetOrderResponse,
   GetOrdersChanceRequestQuery,
@@ -260,6 +261,14 @@ export default class ApiUpbit {
       query,
     );
   }
+
+  /**
+   * get market all 
+   */
+  public async getMarketAll(): Promise<GetMarketAllResponse[]> {
+    return this.requestApi<GetMarketAllResponse[]>('GET','/market/all?isDetails=false');
+  }
+
 
   /**
    * Request a Deposit of KRW.
