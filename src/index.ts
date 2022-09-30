@@ -23,12 +23,18 @@ import {
   GetDepositsRequestQuery,
   GetDepositsResponse,
   GetMarketAllResponse,
+  GetOrderBookResponse,
+  GetOrderBookRequestQuery,
   GetOrderRequestQuery,
   GetOrderResponse,
   GetOrdersChanceRequestQuery,
   GetOrdersChanceResponse,
   GetOrdersRequestQuery,
   GetOrdersResponse,
+  GetTickerResponse,
+  GetTickerRequestQuery,
+  GetTradesTicksResponse,
+  GetTradesTicksRequestQuery,
   GetWithdrawRequestQuery,
   GetWithdrawResponse,
   GetWithdrawsChanceRequestQuery,
@@ -302,6 +308,30 @@ export default class ApiUpbit {
     let url = '/candles/months';
     return this.requestApi<GetCandlesMonthsResponse[]>('GET', url, query);
   }
+
+
+  public async getTradesTicks(query:GetTradesTicksRequestQuery): Promise<GetTradesTicksResponse[]> {
+    if (!query) { throw new Error('query value must be included.'); }
+    let url= '/trades/ticks';
+    return this.requestApi<GetTradesTicksResponse[]>('GET', url, query);
+  }
+  public async getTicker(query:GetTickerRequestQuery): Promise<GetTickerResponse[]> {
+    if (!query) { throw new Error('query value must be included.'); }
+    let url= '/ticker';
+    return this.requestApi<GetTickerResponse[]>('GET', url, query);
+  }
+
+  public async getOrderBook(query:GetOrderBookRequestQuery): Promise<GetOrderBookResponse[]> {
+    if (!query) { throw new Error('query value must be included.'); }
+    let url= '/orderbook';
+    return this.requestApi<GetOrderBookResponse[]>('GET', url, query);
+  }
+
+
+
+
+
+
 
 
 
