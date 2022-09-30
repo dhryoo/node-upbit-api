@@ -2,10 +2,19 @@ import * as crypto from 'crypto';
 import * as jwt from 'jsonwebtoken';
 import * as qs from 'query-string';
 
+
 import {
   CancelOrderRequestQuery,
   CancelOrderResponse,
   GetAccountsResponse,
+  GetCandlesDaysRequestQuery,
+  GetCandlesDaysResponse,
+  GetCandlesMinutesRequestQuery,
+  GetCandlesMinutesResponse,
+  GetCandlesWeeksRequestQuery,
+  GetCandlesWeeksResponse,
+  GetCandlesMonthsRequestQuery,
+  GetCandlesMonthsResponse,
   GetDepositCoinAddreesRequstQuery,
   GetDepositCoinAddressResponse,
   GetDepositCoinAddressesResponse,
@@ -266,8 +275,39 @@ export default class ApiUpbit {
    * get market all 
    */
   public async getMarketAll(): Promise<GetMarketAllResponse[]> {
-    return this.requestApi<GetMarketAllResponse[]>('GET','/market/all?isDetails=false');
+    let url = '/market/all?isDetails=false';
+    return this.requestApi<GetMarketAllResponse[]>('GET',url);
   }
+
+  public async getCandlesMinutes(query: GetCandlesMinutesRequestQuery):Promise<GetCandlesMinutesResponse[]> {
+    if (!query) { throw new Error('query value must be included.'); }
+ 
+    let url = '/candles/minutes/' + query.unit;
+    return this.requestApi<GetCandlesMinutesResponse[]>('GET', url, query);
+  }
+
+  public async getCandlesDays(query: GetCandlesDaysRequestQuery):Promise<GetCandlesDaysResponse[]> {
+    if (!query) { throw new Error('query value must be included.'); }
+    let url = '/candles/days';
+    return this.requestApi<GetCandlesDaysResponse[]>('GET', url, query);
+  }
+
+  public async getCandlesWeeks(query: GetCandlesWeeksRequestQuery):Promise<GetCandlesWeeksResponse[]> {
+    if (!query) { throw new Error('query value must be included.'); }
+    let url = '/candles/weeks';
+    return this.requestApi<GetCandlesWeeksResponse[]>('GET', url, query);
+  }
+  public async getCandlesMonths(query: GetCandlesMonthsRequestQuery):Promise<GetCandlesMonthsResponse[]> {
+    if (!query) { throw new Error('query value must be included.'); }
+    let url = '/candles/months';
+    return this.requestApi<GetCandlesMonthsResponse[]>('GET', url, query);
+  }
+
+
+
+
+
+
 
 
   /**
